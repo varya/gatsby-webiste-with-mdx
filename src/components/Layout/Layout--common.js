@@ -6,8 +6,12 @@ import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
 import Prompt from "../Prompt";
 import Article from "../Article";
 import TextBlock from "../TextBlock";
+import BreadCrumbs from "../BreadCrumbs";
 
-export default function PageTemplate({ data: { mdx } }) {
+export default function PageTemplate({
+    data: { mdx },
+    pageContext: { breadCrumbs },
+  }) {
   return (
     <Container>
       <Content>
@@ -16,6 +20,7 @@ export default function PageTemplate({ data: { mdx } }) {
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </TextBlock>
         </Article>
+        <BreadCrumbs data={breadCrumbs} />
       </Content>
       <RightSide>1</RightSide>
       <LeftSide>
