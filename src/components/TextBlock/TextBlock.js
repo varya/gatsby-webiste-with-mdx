@@ -60,7 +60,6 @@ const TextBlock = props => {
     title,
     subTitle,
     readingTime,
-    html,
     children,
   } = props;
 
@@ -82,7 +81,7 @@ const TextBlock = props => {
 
 TextBlock.propTypes = {
   title: PropTypes.string.isRequired,
-  html: PropTypes.object.isRequired
+  children: PropTypes.object.isRequired
 };
 
 export default TextBlock;
