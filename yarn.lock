@@ -9136,6 +9136,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-create-component-from-tag-prop@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-create-component-from-tag-prop/-/react-create-component-from-tag-prop-1.4.0.tgz#a1b3ad06cecb185cd1ba4215f937bd03c69979a9"
+
 react-dev-utils@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.3.tgz#5b42d9ea58d5e9e017a2f57a40a8af408a3a46fb"
@@ -10568,9 +10572,20 @@ style-to-object@^0.2.1:
   dependencies:
     css "2.2.4"
 
+styled-components-breakpoint@^2.0.2:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/styled-components-breakpoint/-/styled-components-breakpoint-2.1.1.tgz#37c1b92b0e96c1bbc5d293724d7a114daaa15fca"
+
 styled-components-breakpoint@^3.0.0-preview.20:
   version "3.0.0-preview.20"
   resolved "https://registry.yarnpkg.com/styled-components-breakpoint/-/styled-components-breakpoint-3.0.0-preview.20.tgz#877e88a00c0cf66976f610a1d347839a1a0b6d70"
+
+styled-components-grid@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/styled-components-grid/-/styled-components-grid-2.2.2.tgz#bc723318da1288d8771a4bee324b5f97ff3c2df4"
+  dependencies:
+    react-create-component-from-tag-prop "^1.4.0"
+    styled-components-breakpoint "^2.0.2"
 
 styled-components@^5.0.1:
   version "5.0.1"
