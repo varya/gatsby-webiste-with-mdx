@@ -3,16 +3,24 @@ import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
+import Prompt from "../Prompt";
+import Article from "../Article";
+import TextBlock from "../TextBlock";
 
 export default function PageTemplate({ data: { mdx } }) {
   return (
     <Container>
       <Content>
-        <h1>{mdx.frontmatter.title}</h1>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
+        <Article>
+          <TextBlock title={mdx.frontmatter.title} subTitle={mdx.frontmatter.subTitle} readingTime={mdx.fields.readingTime}>
+            <MDXRenderer>{mdx.body}</MDXRenderer>
+          </TextBlock>
+        </Article>
       </Content>
       <RightSide>1</RightSide>
-      <LeftSide>2</LeftSide>
+      <LeftSide>
+        <Prompt />
+      </LeftSide>
     </Container>
   )
 }
@@ -24,6 +32,12 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
+      }
+      fields {
+        slug
+        readingTime {
+          minutes
+        }
       }
     }
   }
