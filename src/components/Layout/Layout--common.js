@@ -7,10 +7,16 @@ import Prompt from "../Prompt";
 import Article from "../Article";
 import TextBlock from "../TextBlock";
 import BreadCrumbs from "../BreadCrumbs";
+import GithubEdit from "../GithubEdit";
 
 export default function PageTemplate({
-    data: { mdx },
-    pageContext: { breadCrumbs },
+    data: {
+      mdx,
+    },
+    pageContext: {
+      breadCrumbs,
+      fileSourceUrl,
+    },
   }) {
   return (
     <Container>
@@ -21,6 +27,7 @@ export default function PageTemplate({
           </TextBlock>
         </Article>
         <BreadCrumbs data={breadCrumbs} />
+        <GithubEdit link={fileSourceUrl} />
       </Content>
       <RightSide>1</RightSide>
       <LeftSide>

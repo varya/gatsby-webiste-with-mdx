@@ -2,11 +2,15 @@ const path = require("path");
 
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
+const REPO_URL = 'https://github.com/varya/varya.github.com';
+const REPO_BRANCH = 'develop';``
+
 exports.onCreateNode = ({ node, getNode, actions }) => {
 
     const { createNodeField } = actions;
 
     if (node.internal.type === "Mdx") {
+      const fileNode = getNode(node.parent);
       let slug = createFilePath({ node, getNode, basePath: `pages` });
 
       const separtorIndex = ~slug.indexOf("--") ? slug.indexOf("--") : 0;
@@ -19,6 +23,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         name: `slug`,
         value: newSlug,
       });
+
+      createNodeField({
+        node,
+        name: 'fileRelativePath',
+        value: fileNode.relativePath,
+      });
+
     }
 
 }
@@ -35,6 +46,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               fileAbsolutePath
               fields {
                 slug
+                fileRelativePath
               }
             }
           }
@@ -75,6 +87,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         breadCrumbs.push({node, last: true});
       }
 
+      const fileSourceUrl = `${REPO_URL}/edit/${REPO_BRANCH}/content/pages/${node.fields.fileRelativePath}`;
+
       createPage({
         // This is the slug you created before
         // (or `node.frontmatter.slug`)
@@ -87,6 +101,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           id: node.id,
           slug,
           breadCrumbs,
+          fileSourceUrl,
         },
       })
     })
