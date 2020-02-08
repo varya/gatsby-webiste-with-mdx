@@ -11,7 +11,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        extensions: [`.mdx`, `.md`],
         defaultLayouts: { default: path.resolve('./src/components/layout.js') },
         gatsbyRemarkPlugins: [
         ]
@@ -56,5 +55,11 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        include: /src/
+      }
+    },
   ],
 }
