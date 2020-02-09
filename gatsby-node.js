@@ -46,6 +46,17 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         value: newSlug,
       });
 
+      // detect Node language
+      let lang = 'en';
+      if (fileNode.base.endsWith('_ru.md')) {
+        lang = 'ru';
+      }
+      createNodeField({
+        node,
+        name: `lang`,
+        value: lang
+      });
+
       createNodeField({
         node,
         name: 'fileRelativePath',
@@ -69,6 +80,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               fields {
                 slug
                 fileRelativePath
+                lang
+              }
+              frontmatter {
+                title
+                subTitle
               }
             }
           }
