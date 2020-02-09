@@ -38,8 +38,8 @@ export default function PageTemplate({
 }
 
 export const pageQuery = graphql`
-  query PageByPath($id: String) {
-    mdx(id: { eq: $id }) {
+  query PageByPath($slug: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       body
       frontmatter {
