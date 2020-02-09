@@ -13,6 +13,13 @@ module.exports = {
       options: {
         defaultLayouts: { default: path.resolve('./src/components/layout.js') },
         gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+              backgroundColor: "transparent"
+            }
+          },
         ]
       },
     },
