@@ -16,6 +16,28 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       const separtorIndex = ~slug.indexOf("--") ? slug.indexOf("--") : 0;
       const shortSlugStart = separtorIndex ? separtorIndex + 2 : 0;
 
+      // only for posts
+      if (fileNode.sourceInstanceName === 'posts' || fileNode.sourceInstanceName === 'life') {
+
+        //const folder = node.frontmatter.old ? 'issues' : fileNode.sourceInstanceName;
+        const folder = fileNode.sourceInstanceName;
+
+        if (node.frontmatter.v2 || node.frontmatter.old) {
+
+          let paths = fileNode.relativePath.split('index_en.md');
+          if (paths[1] === '') {
+            slug = `en/${folder}/${paths[0]}`
+          }
+          paths = fileNode.relativePath.split('index_ru.md');
+          if (paths[1] === '') {
+            slug = `ru/${folder}/${paths[0]}`
+          }
+        } else {
+          slug = `blog${slug}`
+        }
+
+      }
+
       const newSlug = `${separtorIndex ? "/" : ""}${slug.substring(shortSlugStart)}`;
 
       createNodeField({
@@ -57,7 +79,26 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
     }
     // Create blog post pages.
-    const items = result.data.allMdx.edges
+    const items = result.data.allMdx.edges;
+
+    const posts = items.filter(item => /posts/.test(item.node.fileAbsolutePath));
+    posts.forEach(({ node }, index) => {
+      const slug = node.fields.slug;
+      const next = index === 0 ? undefined : posts[index - 1].node;
+      const prev = index === posts.length - 1 ? undefined : posts[index + 1].node;
+      const fileSourceUrl = `${REPO_URL}/edit/${REPO_BRANCH}/content/posts/${node.fields.fileRelativePath}`;
+
+      createPage({
+        path: slug,
+        component: path.resolve(`./src/components/Layout/Layout--post.js`),
+        context: {
+          slug,
+          prev,
+          next,
+          fileSourceUrl
+        },
+      });
+    });
 
     const pages = items.filter(item => /pages/.test(item.node.fileAbsolutePath));
 

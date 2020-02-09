@@ -6,7 +6,6 @@ import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
 import Prompt from "../Prompt";
 import Article from "../Article";
 import TextBlock from "../TextBlock";
-import BreadCrumbs from "../BreadCrumbs";
 import GithubEdit from "../GithubEdit";
 
 export default function PageTemplate({
@@ -14,7 +13,6 @@ export default function PageTemplate({
       mdx,
     },
     pageContext: {
-      breadCrumbs,
       fileSourceUrl,
     },
   }) {
@@ -26,7 +24,6 @@ export default function PageTemplate({
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </TextBlock>
         </Article>
-        <BreadCrumbs data={breadCrumbs} />
         <GithubEdit link={fileSourceUrl} />
       </Content>
       <RightSide>1</RightSide>
@@ -38,8 +35,8 @@ export default function PageTemplate({
 }
 
 export const pageQuery = graphql`
-  query PageByPath($id: String) {
-    mdx(id: { eq: $id }) {
+  query PostBySlug($slug: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       body
       frontmatter {
