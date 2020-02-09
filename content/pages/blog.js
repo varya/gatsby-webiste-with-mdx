@@ -34,6 +34,7 @@ export const guery = graphql`
     ) {
       edges {
         node {
+          excerpt
           fields {
             slug
           }
