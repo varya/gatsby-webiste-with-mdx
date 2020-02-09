@@ -2,15 +2,15 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
 import Prompt from "../Prompt";
 import Article from "../Article";
 import TextBlock from "../TextBlock";
+import BreadCrumbs from "../BreadCrumbs";
 import GithubEdit from "../GithubEdit";
 
 import LayoutCommon from './Layout--common'
 
-export default function PostTemplate({
+export default function PageTemplate({
     data: {
       mdx,
     },
@@ -28,6 +28,7 @@ export default function PostTemplate({
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </TextBlock>
         </Article>
+        <BreadCrumbs data={breadCrumbs} />
         <GithubEdit link={fileSourceUrl} />
         </>
       )}
@@ -40,7 +41,7 @@ export default function PostTemplate({
 }
 
 export const pageQuery = graphql`
-  query PostBySlug($slug: String!) {
+  query PageByPath($slug: String!) {
     mdx(fields: { slug: { eq: $slug } }) {
       id
       body

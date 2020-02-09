@@ -1,56 +1,23 @@
 import React from "react"
-import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
-import Prompt from "../Prompt";
-import Article from "../Article";
-import TextBlock from "../TextBlock";
-import BreadCrumbs from "../BreadCrumbs";
-import GithubEdit from "../GithubEdit";
 
-export default function PageTemplate({
-    data: {
-      mdx,
-    },
-    pageContext: {
-      breadCrumbs,
-      fileSourceUrl,
-    },
+export default function LayoutCommon({
+    content,
+    right,
+    left
   }) {
   return (
     <Container>
       <Content>
-        <Article>
-          <TextBlock title={mdx.frontmatter.title} subTitle={mdx.frontmatter.subTitle} readingTime={mdx.fields.readingTime}>
-            <MDXRenderer>{mdx.body}</MDXRenderer>
-          </TextBlock>
-        </Article>
-        <BreadCrumbs data={breadCrumbs} />
-        <GithubEdit link={fileSourceUrl} />
+        {content}
       </Content>
-      <RightSide>1</RightSide>
+      <RightSide>
+        {right}
+      </RightSide>
       <LeftSide>
-        <Prompt />
+        {left}
       </LeftSide>
     </Container>
   )
 }
-
-export const pageQuery = graphql`
-  query PageByPath($slug: String!) {
-    mdx(fields: { slug: { eq: $slug } }) {
-      id
-      body
-      frontmatter {
-        title
-      }
-      fields {
-        slug
-        readingTime {
-          minutes
-        }
-      }
-    }
-  }
-`
