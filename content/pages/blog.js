@@ -2,6 +2,7 @@ import React from "react";
 
 import { graphql } from 'gatsby';
 
+import LayoutCommon from '../../src/components/Layout/Layout--common'
 import Blog from "../../src/components/Blog";
 
 class BlogPage extends React.Component {
@@ -14,11 +15,11 @@ class BlogPage extends React.Component {
     } = this.props;
 
     return (
-      <div>
-
-        <Blog posts={posts} />
-
-      </div>
+      <LayoutCommon
+        content={(
+          <Blog posts={posts} />
+        )}
+        />
     );
   }
 }
