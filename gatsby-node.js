@@ -39,11 +39,16 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       }
 
       const newSlug = `${separtorIndex ? "/" : ""}${slug.substring(shortSlugStart)}`;
-
       createNodeField({
         node,
         name: `slug`,
         value: newSlug,
+      });
+
+      createNodeField({
+        node,
+        name: `prefix`,
+        value: separtorIndex ? slug.substring(1, separtorIndex) : ""
       });
 
       // detect Node language
@@ -63,6 +68,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         value: fileNode.relativePath,
       });
 
+      const level = (fileNode.relativePath.match(/\//g) || []).length;
+      createNodeField({
+        node,
+        name: `level`,
+        value: level
+      });
+
     }
 
 }
@@ -72,19 +84,25 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const { createPage } = actions
     const result = await graphql(`
       query {
-        allMdx {
+        allMdx(
+          filter: { fileAbsolutePath: { regex: "//posts|pages//" } }
+          sort: { fields: [fields___prefix], order: DESC }
+        ) {
           edges {
             node {
               id
               fileAbsolutePath
               fields {
                 slug
+                prefix
                 fileRelativePath
                 lang
+                level
               }
               frontmatter {
                 title
                 subTitle
+                date
               }
             }
           }

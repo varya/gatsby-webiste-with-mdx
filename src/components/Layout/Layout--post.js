@@ -18,6 +18,7 @@ export default function PostTemplate({
       breadCrumbs,
       fileSourceUrl,
     },
+    location,
   }) {
   return (
     <LayoutCommon
@@ -35,6 +36,7 @@ export default function PostTemplate({
       left={(
         <Prompt />
       )}
+      location={location}
       />
   )
 }

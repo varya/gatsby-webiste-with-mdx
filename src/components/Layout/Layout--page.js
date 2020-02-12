@@ -18,6 +18,7 @@ export default function PageTemplate({
       breadCrumbs,
       fileSourceUrl,
     },
+    location,
   }) {
   return (
     <LayoutCommon
@@ -36,6 +37,7 @@ export default function PageTemplate({
       left={(
         <Prompt />
       )}
+      location={location}
       />
   )
 }

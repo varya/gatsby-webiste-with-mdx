@@ -11,7 +11,8 @@ class BlogPage extends React.Component {
     const {
       data: {
         posts: { edges: posts = [] }
-      }
+      },
+      location,
     } = this.props;
 
     return (
@@ -19,6 +20,7 @@ class BlogPage extends React.Component {
         content={(
           <Blog posts={posts} />
         )}
+        location={location}
         />
     );
   }
