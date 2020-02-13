@@ -1,11 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
 import Prompt from "../Prompt";
 import Article from "../Article";
-import TextBlock from "../TextBlock";
+import Post from "../Post";
 import GithubEdit from "../GithubEdit";
 
 import LayoutCommon from './Layout--common'
@@ -13,9 +12,13 @@ import LayoutCommon from './Layout--common'
 export default function PostTemplate({
     data: {
       mdx,
+      site: {
+        siteMetadata,
+      },
     },
     pageContext: {
-      breadCrumbs,
+      next,
+      prev,
       fileSourceUrl,
     },
     location,
@@ -25,12 +28,12 @@ export default function PostTemplate({
       content={(
         <>
         <Article>
-          <TextBlock
-            title={mdx.frontmatter.title}
-            subTitle={mdx.frontmatter.subTitle}
-            readingTime={mdx.fields.readingTime}>
-            <MDXRenderer>{mdx.body}</MDXRenderer>
-          </TextBlock>
+          <Post
+            post={mdx}
+            next={next}
+            prev={prev}
+            siteMetadata={siteMetadata}
+          />
         </Article>
         <GithubEdit link={fileSourceUrl} />
         </>
@@ -57,6 +60,11 @@ export const pageQuery = graphql`
         readingTime {
           minutes
         }
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
       }
     }
   }

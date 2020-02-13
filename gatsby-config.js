@@ -1,11 +1,16 @@
 const path = require('path')
+const config = require("./content/meta/config");
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter MDX Basic',
-    description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@chrisbiscardi',
+    title: config.siteTitle,
+    description: config.siteDescription,
+    siteUrl: config.siteUrl,
+    pathPrefix: config.pathPrefix,
+    facebook: {
+      appId: process.env.FB_APP_ID ? process.env.FB_APP_ID : "",
+    },
+    author: "Varya Stepanova",
   },
   plugins: [
     {
