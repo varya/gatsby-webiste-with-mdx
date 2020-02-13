@@ -67,6 +67,16 @@ export const pageQuery = graphql`
         v2
         old
         tumblr
+        meta {
+          desc
+        }
+        cover {
+          childImageSharp {
+            resize(width: 300) {
+              src
+            }
+          }
+        }
       }
     }
     site {
