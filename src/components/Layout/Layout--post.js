@@ -52,19 +52,19 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       id
       body
-      frontmatter {
-        title
-        subTitle
-        tumblr
-        date(formatString: "DD MMMM YYYY")
-      }
       fields {
-        slug
         readingTime {
           minutes
         }
+        slug
         prefix
         disqusIdentifier
+      }
+      frontmatter {
+        title
+        subTitle
+        date(formatString: "DD MMMM YYYY")
+        tumblr
       }
     }
     site {

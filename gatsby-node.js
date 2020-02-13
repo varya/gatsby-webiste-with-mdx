@@ -114,10 +114,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               fields {
                 slug
                 prefix
-                fileRelativePath
                 lang
-                level
                 disqusIdentifier
+                level
+                fileRelativePath
               }
               frontmatter {
                 title
