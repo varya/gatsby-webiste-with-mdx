@@ -25,7 +25,10 @@ export default function PostTemplate({
       content={(
         <>
         <Article>
-          <TextBlock title={mdx.frontmatter.title} subTitle={mdx.frontmatter.subTitle} readingTime={mdx.fields.readingTime}>
+          <TextBlock
+            title={mdx.frontmatter.title}
+            subTitle={mdx.frontmatter.subTitle}
+            readingTime={mdx.fields.readingTime}>
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </TextBlock>
         </Article>
