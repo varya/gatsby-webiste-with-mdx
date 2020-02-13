@@ -64,6 +64,8 @@ export const pageQuery = graphql`
         title
         subTitle
         date(formatString: "DD MMMM YYYY")
+        v2
+        old
         tumblr
       }
     }

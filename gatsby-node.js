@@ -122,6 +122,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               frontmatter {
                 title
                 subTitle
+                v2
+                old
                 date
               }
             }
