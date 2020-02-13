@@ -2,6 +2,7 @@ import React from "react";
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import TextBlock from "../TextBlock";
+import Comments from "../Comments";
 
 const Post = props => {
   const {
@@ -19,6 +20,7 @@ const Post = props => {
         readingTime={readingTime}>
         <MDXRenderer>{post.body}</MDXRenderer>
       </TextBlock>
+      <Comments {...props} />
     </div>
   );
 };

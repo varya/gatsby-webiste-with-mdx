@@ -62,6 +62,25 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         value: lang
       });
 
+      let disqusIdentifier = slug.split('/').filter(item => item != '');
+      if (node.frontmatter.v2) {
+        if (disqusIdentifier[0] === 'en' || disqusIdentifier[0] === 'ru') {
+          disqusIdentifier.shift();
+        }
+        disqusIdentifier.push('index');
+        disqusIdentifier.push(lang);
+      }
+      if (node.frontmatter.old) {
+        disqusIdentifier = disqusIdentifier.map(item => item === 'posts' ? 'issues' : item)
+      }
+      disqusIdentifier = disqusIdentifier.join('-');
+
+      createNodeField({
+        node,
+        name: `disqusIdentifier`,
+        value: disqusIdentifier
+      });
+
       createNodeField({
         node,
         name: 'fileRelativePath',
@@ -85,7 +104,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     const result = await graphql(`
       query {
         allMdx(
-          filter: { fileAbsolutePath: { regex: "//posts|pages//" } }
+          filter: { fileAbsolutePath: { regex: "//posts|pages|life//" } }
           sort: { fields: [fields___prefix], order: DESC }
         ) {
           edges {
@@ -98,6 +117,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 fileRelativePath
                 lang
                 level
+                disqusIdentifier
               }
               frontmatter {
                 title
@@ -131,6 +151,27 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           next,
           fileSourceUrl
         },
+      });
+    });
+
+    // Create life  posts
+    const lifePosts = items.filter(item => /life/.test(item.node.fileAbsolutePath));
+    lifePosts.forEach(({ node }, index) => {
+      const slug = node.fields.slug;
+      const next = index === 0 ? undefined : lifePosts[index - 1].node;
+      const prev = index === lifePosts.length - 1 ? undefined : lifePosts[index + 1].node;
+
+      const fileSourceUrl = `${REPO_URL}/edit/${REPO_BRANCH}/content/life/${node.fields.fileRelativePath}`;
+
+      createPage({
+        path: slug,
+        component: path.resolve(`./src/components/Layout/Layout--post.js`),
+        context: {
+          slug,
+          prev,
+          next,
+          fileSourceUrl
+        }
       });
     });
 

@@ -54,12 +54,17 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
+        subTitle
+        tumblr
+        date(formatString: "DD MMMM YYYY")
       }
       fields {
         slug
         readingTime {
           minutes
         }
+        prefix
+        disqusIdentifier
       }
     }
     site {
