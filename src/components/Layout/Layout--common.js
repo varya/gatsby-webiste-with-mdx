@@ -51,25 +51,27 @@ export default function LayoutCommon({
         pages: { edges: pages }
       } = data;
       return (
-    <SiteContainer>
-      <Header path={location.pathname} pages={pages}/>
-      <main>
-        <Container>
-          <Content>
-            {content}
-          </Content>
-          <RightSide>
-            {right}
-          </RightSide>
-          <LeftSide>
-            {left}
-          </LeftSide>
-        </Container>
-      </main>
-      <Footer />
-    </SiteContainer>
-    )
-}}
-/>
+        <>
+          <SiteContainer>
+            <Header path={location.pathname} pages={pages}/>
+            <main>
+              <Container>
+                <Content>
+                  {content}
+                </Content>
+                <RightSide>
+                  {right}
+                </RightSide>
+                <LeftSide>
+                  {left}
+                </LeftSide>
+              </Container>
+            </main>
+            <Footer />
+          </SiteContainer>
+        </>
+      )
+    }}
+    />
   )
 }
