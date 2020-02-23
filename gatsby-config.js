@@ -38,32 +38,32 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `pages`,
-        path: `${__dirname}/content/pages`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `posts`,
         path: `${__dirname}/content/posts`,
       },
     },
     {
-        resolve: `gatsby-source-filesystem`,
-        options: {
-          name: `life`,
-          path: `${__dirname}/content/life`,
-        },
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `life`,
+        path: `${__dirname}/content/life`,
       },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `pages`,
+        path: `${__dirname}/content/pages`,
+      },
+    },
     {
       resolve: `gatsby-plugin-page-creator`,
       options: {
         path: `${__dirname}/content/pages`,
       },
     },
-    `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
     `gatsby-remark-reading-time`,
     {
