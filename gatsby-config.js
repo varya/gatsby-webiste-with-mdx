@@ -65,6 +65,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-catch-links`,
     `gatsby-remark-reading-time`,
     {
       resolve: `gatsby-plugin-manifest`,
