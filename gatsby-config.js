@@ -88,5 +88,6 @@ module.exports = {
         include: /src/
       }
     },
+    `gatsby-plugin-styled-components`
   ],
 }
