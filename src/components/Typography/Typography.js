@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { injectGlobal } from 'styled-components'
 
 import { colorScheme } from '../Colors/Colors.js';
 
@@ -29,7 +29,7 @@ import LatoItalicWoff2 from './fonts/lato-italic.woff2';
 */
 
 
-createGlobalStyle`
+injectGlobal`
 /* cyrillic-ext */
 @font-face {
   font-family: 'Tinos';
@@ -101,7 +101,7 @@ createGlobalStyle`
 
 
 
-createGlobalStyle`
+injectGlobal`
 /* TODO: load from website for cyrillic pages only */
 
 @font-face {
@@ -130,7 +130,7 @@ createGlobalStyle`
   font-style: italic; }
 `;
 
-createGlobalStyle`
+injectGlobal`
 * {
   font-family: 'Lato', 'Helvetica Neue', Helvetica;
   color: ${colorScheme.dark};

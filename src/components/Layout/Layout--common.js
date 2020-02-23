@@ -3,6 +3,7 @@ import { StaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import breakpoint from 'styled-components-breakpoint'
 
+import Typography from "../Typography";
 import Header from "../Header";
 import Footer from "../Footer/";
 import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
