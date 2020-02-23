@@ -16,6 +16,18 @@ export const SiteContainer = styled.div`
   `}
 `
 
+const googleAnalytics = `
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128056453-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-128056453-1');
+</script>
+`;
+
 export default function LayoutCommon({
     content,
     right,
@@ -69,6 +81,7 @@ export default function LayoutCommon({
             </main>
             <Footer />
           </SiteContainer>
+          <div dangerouslySetInnerHTML={{ __html: googleAnalytics }} />
         </>
       )
     }}
