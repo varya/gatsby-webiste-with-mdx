@@ -1,6 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
 
+let stylesStr;
+if (process.env.NODE_ENV === `production`) {
+  try {
+    stylesStr = '';
+    //stylesStr = require(`!raw-loader!../public/styles.css`);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 const googleAnalytics = `
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128056453-1"></script>
