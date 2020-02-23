@@ -14,6 +14,10 @@ const googleAnalytics = `
 `;
 
 export default function HTML(props) {
+  let css;
+  if (process.env.NODE_ENV === `production`) {
+    css = <style id="gatsby-inlined-css" dangerouslySetInnerHTML={{ __html: stylesStr }} />;
+  }
   return (
     <html {...props.htmlAttributes}>
       <head>
@@ -24,6 +28,7 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
+        {css}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#D0E0D8" />
         <meta name="apple-mobile-web-app-title" content="Lazywill" />
