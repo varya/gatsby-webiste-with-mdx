@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import { Container, LeftSide, Content, RightSide } from "./Layout--elements";
+import Seo from "../Seo"
 import Prompt from "../Prompt";
 import Article from "../Article";
 import Post from "../Post";
@@ -24,26 +25,29 @@ export default function PostTemplate({
     location,
   }) {
   return (
-    <LayoutCommon
-      content={(
-        <>
-        <Article>
-          <Post
-            post={mdx}
-            next={next}
-            prev={prev}
-            siteMetadata={siteMetadata}
-          />
-        </Article>
-        <GithubEdit link={fileSourceUrl} />
-        </>
-      )}
-      right=""
-      left={(
-        <Prompt />
-      )}
-      location={location}
+    <>
+      <LayoutCommon
+        content={(
+          <>
+            <Article>
+              <Post
+                post={mdx}
+                next={next}
+                prev={prev}
+                siteMetadata={siteMetadata}
+              />
+            </Article>
+            <GithubEdit link={fileSourceUrl} />
+          </>
+        )}
+        right=""
+        left={(
+          <Prompt />
+        )}
+        location={location}
       />
+      <Seo data={mdx} />
+    </>
   )
 }
 
